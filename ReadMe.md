@@ -1,10 +1,7 @@
 #NTLatticeGraph
 
 ##About
-NTLatticeGraph is a portable file specification for representing lattice structures. The main goals of NTLatticeGraph are as follows:
-
-* A simple graph-based representation of a lattice that support nodes, beams, &surfaces.
-
+NTLatticeGraph is a lightweight, portable file specification for representing 3D lattice structures. NTLatticeGraph is, appropriately enough, a graph representation; its purpose is to allow for lattices to be designed, manipulated, simulated, and manufactured easily.
 
 ##Usage
 We plan to open-source a NTLatticeGraph Parser & put it here ASAP. Additionally we will include some sample files too.
