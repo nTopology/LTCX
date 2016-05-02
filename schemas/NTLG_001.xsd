@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="NTLatticeGraph"
+    xmlns="http://ntopology.com/NTLatticeGraph/NTLatticeGraph/2016/04"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" blockDefault="#all">
+  <!--note, the xmlns uri does not currently exist above-->
+  <xs:annotation>
+    <xs:documentation>
+      <![CDATA[
+Schema notes:
+]]>
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:element name="BeamTypes">  <!--Better name for this? this is optional, a definition for a function along a beam, default it linear ex.: parabolic -->
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="function" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="nodes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="node">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="x" type="xs:double"/>
+              <xs:element name="y" type="xs:double"/>
+              <xs:element name="z" type="xs:double"/>
+              <xs:element name="diameter" type="xs:double"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="beams">
+    <xs:complexType>
+      <xs:sequence>
+      <xs:element name="beam">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="n1" type="xs:IDREF"/>
+            <xs:element name="n2" type="xs:IDREF"/>
+            <xs:element name="interp" type="xs:IDREF"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:ID" use="required"/>
+        </xs:complexType>
+      </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+</xs:schema>
