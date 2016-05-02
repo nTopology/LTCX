@@ -1,1 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
+
+<nodes>
+  <node id="1">
+    <x>-1.0</x>
+    <y>-1.0</y>
+    <z>-1.0</z>
+    <d>.10</d>
+  </node>
+
+  <note id="2">
+    <to>Jani</to>
+    <from>Tove</from>
+    <heading>Re: Reminder</heading>
+    <body>I will not!</body>
+  </note>
+</nodes>
