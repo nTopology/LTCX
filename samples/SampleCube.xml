@@ -2,17 +2,53 @@
 
 
 <nodes>
-  <node id="1">
+  <node id="0">
     <x>-1.0</x>
     <y>-1.0</y>
     <z>-1.0</z>
     <d>.10</d>
   </node>
+  <node id="1">
+    <x>1.0</x>
+    <y>-1.0</y>
+    <z>-1.0</z>
+    <d>.10</d>
+  </node>
+  <node id="2">
+    <x>1.0</x>
+    <y>1.0</y>
+    <z>-1.0</z>
+    <d>.10</d>
+  </node>
+  <node id="3">
+    <x>-1.0</x>
+    <y>1.0</y>
+    <z>-1.0</z>
+    <d>.10</d>
+  </node>
 
-  <note id="2">
-    <to>Jani</to>
-    <from>Tove</from>
-    <heading>Re: Reminder</heading>
-    <body>I will not!</body>
-  </note>
+  <node id="4">
+    <x>-1.0</x>
+    <y>-1.0</y>
+    <z>1.0</z>
+    <d>.10</d>
+  </node>
+  <node id="5">
+    <x>1.0</x>
+    <y>-1.0</y>
+    <z>1.0</z>
+    <d>.10</d>
+  </node>
+  <node id="6">
+    <x>1.0</x>
+    <y>1.0</y>
+    <z>1.0</z>
+    <d>.10</d>
+  </node>
+  <node id="7">
+    <x>-1.0</x>
+    <y>1.0</y>
+    <z>1.0</z>
+    <d>.10</d>
+  </node> 
 </nodes>
