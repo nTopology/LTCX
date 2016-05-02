@@ -12,4 +12,4 @@ We plan to open-source a NTLatticeGraph Parser & put it here ASAP. Additionally 
 Until then, please see the [spec](https://github.com/nTopology/NTLatticeGraph/blob/master/Spec.md "NTLatticeGraph Spec v0.1.0")  & [schema](https://github.com/nTopology/NTLatticeGraph/blob/master/schemas/NTLG_001.xsd "NTLatticeGraph schema v0.1.0").
 
 ##License
-See the file LICENSE.md
+See the file [LICENSE.md](https://github.com/nTopology/NTLatticeGraph/blob/master/License.md "NTLatticeGraph License v0.1.0")
