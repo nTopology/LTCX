@@ -1,9 +1,9 @@
 #NTLatticeGraph
-
-The MIT License (MIT)
 Copyright (c) 2016, nTopology inc.
 All rights reserved.
 [www.ntopology.com](www.ntopology.com "nTopology's Homepage")
+
+The MIT License (MIT)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
