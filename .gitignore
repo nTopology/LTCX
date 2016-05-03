@@ -77,3 +77,15 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.opendb
+lib/vc14/libNTLatticeGraph/libNTLatticeGraph.vcxproj.filters
+*.tlog
+*.ilk
+lib/vc14/x64/Debug/libNTLatticeGraph.pdb
+*.pdb
+lib/vc14/libNTLatticeGraph/x64/Debug/vc140.idb
+*.log
+lib/vc14/Debug/vc140.idb
+*.filters
+lib/vc14/libNTLatticeGraph.VC.db
+*.suo
