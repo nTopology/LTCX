@@ -25,3 +25,9 @@
 //
 
 #include "libNTLG.h"
+
+
+int main(int argc, const char ** argv)
+{
+
+}
