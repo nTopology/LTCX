@@ -89,3 +89,4 @@ lib/vc14/Debug/vc140.idb
 *.filters
 lib/vc14/libNTLatticeGraph.VC.db
 *.suo
+*.idb
