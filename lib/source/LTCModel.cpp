@@ -24,16 +24,6 @@
 // SOFTWARE.
 //
 
-#include "libNTLG.h"
-#include "tinyxml2.h"
+#include "LTCModel.h"
 
-int main(int argc, const char ** argv)
-{
-  if (argc > 1) {
-    tinyxml2::XMLDocument* doc = new tinyxml2::XMLDocument();
-    //clock_t startTime = clock();
-    doc->LoadFile(argv[1]);
 
-    delete doc;
-  }
-}
