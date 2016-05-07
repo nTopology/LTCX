@@ -26,7 +26,6 @@
 
 #include "LTCModel.h"
 #include "tinyxml2.h"
-#include "LTCGraph.h"
 
 using namespace tinyxml2;
 
@@ -100,4 +99,68 @@ namespace LTC {
 
     mGraphs.push_back(graph);
   }
+
+  LTC::LTC_ERROR LTCModel::write(const char* path)
+  {
+    auto doc = std::make_unique<XMLDocument>();
+    auto dec = doc->NewDeclaration();
+    doc->InsertFirstChild(dec);
+    for (auto& graph : mGraphs) {
+      auto latticeX = doc->NewElement("Lattice");
+      latticeX->SetAttribute("id", graph->getID());
+      latticeX->SetAttribute("name", graph->getName().c_str());
+      auto nodesX = latticeX->InsertEndChild(doc->NewElement("nodes"));
+
+      const auto& nodes = graph->getNodes();
+      int count = 0;
+      for (auto& n : nodes) {
+        auto newNode = doc->NewElement("node");
+        newNode->SetAttribute("id", count);
+        newNode->SetAttribute("x", n.mX);
+        newNode->SetAttribute("y", n.mY);
+        newNode->SetAttribute("z", n.mZ);
+        if (n.mRadius > 0.0) {
+          newNode->SetAttribute("r", n.mRadius);
+        }
+        nodesX->InsertEndChild(newNode);
+        count++;
+      }
+
+      auto beamsX = latticeX->InsertEndChild(doc->NewElement("beams"));
+
+      const auto& beams = graph->getBeams();
+      count = 0;
+      for (auto& b : beams) {
+        auto newBeam = doc->NewElement("beam");
+        newBeam->SetAttribute("id", count);
+        newBeam->SetAttribute("n1", b.mNode1Idx);
+        newBeam->SetAttribute("n2", b.mNode2Idx);
+        beamsX->InsertEndChild(newBeam);
+      }
+      doc->InsertEndChild(latticeX);
+      count++;
+    }
+
+    auto err = doc->SaveFile(path);
+    return static_cast<LTC_ERROR>(err);
+  }
+
+  LTC::LTC_ERROR LTCModel::addGeometry(const std::vector<Node>& nodes, 
+                                       const std::vector<Beam>& beams, 
+                                       const std::string& name)
+  {
+    auto graph = LTCGraph::create((int)mGraphs.size());
+    graph->setNodes(nodes);
+    graph->setBeams(beams);
+    graph->setName(name);
+    mGraphs.push_back(graph);
+    return LTC_ERROR::OK;
+  }
+
+  LTC::LTC_ERROR LTCModel::addGeometry(std::shared_ptr<LTCGraph> graph)
+  {
+    mGraphs.push_back(graph);
+    return LTC_ERROR::OK;
+  }
+
 }//namespace LTC

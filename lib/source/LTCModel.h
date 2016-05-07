@@ -25,11 +25,12 @@
 //
 
 #pragma once
+#include "LTCGraph.h"
+
 #include <memory>
 #include <vector>
 
 namespace LTC {
-  class LTCGraph;
 
   //! LTC_ERROR
   /*!
@@ -86,8 +87,13 @@ namespace LTC {
     LTCModel() {}
 
     LTC_ERROR read(const char* path);
+    LTC_ERROR write(const char* path);
 
-
+    //a few ways to add graphs to the model -- for writing out.
+    LTC_ERROR addGeometry(const std::vector<Node>& nodes,
+                          const std::vector<Beam>& beams,
+                          const std::string& name);
+    LTC_ERROR addGeometry(std::shared_ptr<LTCGraph> graph);
   private:
     std::vector<LTCGraphP> mGraphs;
   };

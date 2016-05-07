@@ -36,7 +36,7 @@ int main(int argc, const char ** argv)
     auto model = LTC::LTCModel::create();
 
     model->read(argv[1]);
-   
+    model->write("c://builds//test.ltcx");
     tinyxml2::XMLDocument* doc = new tinyxml2::XMLDocument();
     //clock_t startTime = clock();
     doc->LoadFile(argv[1]);

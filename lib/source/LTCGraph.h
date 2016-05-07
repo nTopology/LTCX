@@ -76,7 +76,11 @@ namespace LTC {
 
     const std::vector<Node>& getNodes()const { return mNodes; }
     const std::vector<Beam>& getBeams()const { return mBeams; }
+    const std::string& getName()const { return mName; }
+    int getID()const { return mID; }
 
+    void setNodes(const std::vector<Node>& nodes) { mNodes = nodes; }
+    void setBeams(const std::vector<Beam>& beams) { mBeams = beams; }
   private:
     std::string mName;
     int mID;
