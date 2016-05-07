@@ -28,7 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\ext\tinyxml2\tinyxml2.cpp" />
-    <ClCompile Include="..\source\libNTLG.cpp" />
+    <ClCompile Include="..\source\Main.cpp" />
     <ClCompile Include="..\source\LTCGraph.cpp" />
     <ClCompile Include="..\source\LTCModel.cpp" />
     <ClCompile Include="..\source\LTCReader.cpp" />

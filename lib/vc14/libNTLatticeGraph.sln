@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libNTLatticeGraph", "libNTLatticeGraph\libNTLatticeGraph.vcxproj", "{33E0DA9F-C7C4-4308-AAD6-73218CD889BE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libNTLatticeGraph", "libNTLatticeGraph.vcxproj", "{33E0DA9F-C7C4-4308-AAD6-73218CD889BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

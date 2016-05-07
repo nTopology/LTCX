@@ -25,6 +25,7 @@
 //
 
 #pragma once
+#include <memory>
 #include <vector>
 
 namespace LTC {
@@ -54,8 +55,22 @@ namespace LTC {
   */
   class LTCGraph {
   public:
-    LTCGraph() {}
+    static std::shared_ptr<LTCGraph> create(const std::string& name, int id) {
+      return std::make_shared<LTCGraph>(name,id);
+    }
+    static std::shared_ptr<LTCGraph> create(int id) {
+      return std::make_shared<LTCGraph>(id);
+    }
+
+  public:
+    LTCGraph(int id):
+      mID{ id } {}
+    LTCGraph(const std::string& name, int id):
+      mName{ name },
+      mID{ id }
+    {}
     
+    void setName(const std::string& name) { mName = name; }
     void addNode(double x, double y, double z, double radius = -1.0);
     void addBeam(int idx1, int idx2);
 
@@ -63,6 +78,8 @@ namespace LTC {
     const std::vector<Beam>& getBeams()const { return mBeams; }
 
   private:
+    std::string mName;
+    int mID;
     std::vector<Node> mNodes;
     std::vector<Beam> mBeams;
   };

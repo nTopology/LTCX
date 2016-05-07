@@ -26,4 +26,10 @@
 
 #include "LTCReader.h"
 
+namespace LTC {
+  
+  LTCReader::LTCReader(const char* path)
+  {
 
+  }
+}//namespace LTC

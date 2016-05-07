@@ -31,6 +31,41 @@
 namespace LTC {
   class LTCGraph;
 
+  //! LTC_ERROR
+  /*!
+  Note, the first 20 match the error codes in tinyxml2.h, XMLError
+  */
+  enum class LTC_ERROR {
+    OK = 0,
+    XML_NO_ATTRIBUTE = 1,
+    XML_WRONG_ATTRIBUTE_TYPE,
+    XML_ERROR_FILE_NOT_FOUND,
+    XML_ERROR_FILE_COULD_NOT_BE_OPENED,
+    XML_ERROR_FILE_READ_ERROR,
+    XML_ERROR_ELEMENT_MISMATCH,
+    XML_ERROR_PARSING_ELEMENT,
+    XML_ERROR_PARSING_ATTRIBUTE,
+    XML_ERROR_IDENTIFYING_TAG,
+    XML_ERROR_PARSING_TEXT,
+    XML_ERROR_PARSING_CDATA,
+    XML_ERROR_PARSING_COMMENT,
+    XML_ERROR_PARSING_DECLARATION,
+    XML_ERROR_PARSING_UNKNOWN,
+    XML_ERROR_EMPTY_DOCUMENT,
+    XML_ERROR_MISMATCHED_ELEMENT,
+    XML_ERROR_PARSING,
+    XML_CAN_NOT_CONVERT_TEXT,
+    XML_NO_TEXT_NODE,
+
+    XML_ERROR_COUNT,
+
+    LTC_NO_LATTICE = 21,
+    LTC_NO_NODES = 22,
+    LTC_NO_BEAMS = 23,
+
+  };
+
+
   //! LTCModel
   /*!
   LTCModel is the parent interface for reading & writing Lattice Graph Objects.
@@ -38,13 +73,20 @@ namespace LTC {
   This includes an in-memory reference of Lattice Graph Objects.
 
   Example Use:
-  
+  auto ltcFile = "..//sample//cube.ltcx";
   auto model = LTCModel::create();
   */
   class LTCModel {
     typedef std::shared_ptr<LTCGraph> LTCGraphP;
   public:
+    static std::shared_ptr<LTCModel> create() { 
+      return std::make_shared<LTCModel>(); 
+    }
+  public:
     LTCModel() {}
+
+    LTC_ERROR read(const char* path);
+
 
   private:
     std::vector<LTCGraphP> mGraphs;
@@ -53,6 +95,6 @@ namespace LTC {
 
 
 
-}
+}//namespace LTC
 
 

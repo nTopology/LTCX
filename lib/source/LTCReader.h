@@ -29,10 +29,19 @@
 
 namespace LTC {
 
+  //! LTCReader
+  /*!
+  Reads a .ltcx file into memory
+  */
+  class LTCReader {
+  public:
+    LTCReader(const char* path);
+
+  
+  };
 
 
 
-
-}
+}//namespace LTC
 
 

@@ -25,15 +25,28 @@
 //
 
 #include "libNTLG.h"
+#include "LTCModel.h"
 #include "tinyxml2.h"
+
+#include <iostream>
 
 int main(int argc, const char ** argv)
 {
   if (argc > 1) {
+    auto model = LTC::LTCModel::create();
+
+    model->read(argv[1]);
+   
     tinyxml2::XMLDocument* doc = new tinyxml2::XMLDocument();
     //clock_t startTime = clock();
     doc->LoadFile(argv[1]);
 
     delete doc;
   }
+
+  do {
+    std::cout << '\n' << "Press Enter to continue...";
+  } while (std::cin.get() != '\n');
+
+  return 0;
 }
