@@ -1,0 +1,47 @@
+version: 0.1.{build}
+branches:
+  only:
+    - master
+    - building_parser_br
+
+os: Visual Studio 2015
+init:
+  - git config --global core.autocrlf input
+test: off
+clone_folder: C:\projects\NTLatticeGraph
+
+matrix:
+  fast_finish: true     # set this flag to immediately finish build once one of the jobs fails.
+  allow_failures:
+    - platform: x64
+      configuration: Release
+
+platform: x64
+configuration: Release
+
+build:
+  parallel: true # enable MSBuild parallel builds 
+
+build_script:
+  - echo Building Project
+  - cd c:\projects\NTLatticeGraph\lib\vc14
+  - msbuild libNTLatticeGraph.sln
+  - cd ..\bin
+  - 7z a ../libNTLatticeGraph.zip "x64"
+  - cd ..
+  - appveyor PushArtifact libNTLatticeGraph.zip -FileName libNTLatticeGraph.zip
+
+deploy:
+  - provider: AzureBlob
+    storage_account_name:
+      secure: tOWUysKP3pimTRtE9iPM3w==
+    storage_access_key:
+      secure: YKAo1+qzKg7HsFY+wSJdghGsOlvvxACAvgBKL+SViA6MJAfD8dk7p4+CEQoLUz2lMGsk1weSXotfcSHMhEjbnxNbJY54xvFH/TvM1VPbwa2je3P3qwRdhB5khzpAvMoN
+    container: lib-ntlatticegraph
+    folder: $(APPVEYOR_PROJECT_SLUG)\$(APPVEYOR_BUILD_VERSION)
+    artifact: libNTLatticeGraph.zip
+
+notifications:
+  # Slack
+  - provider: Slack
+    incoming_webhook: https://hooks.slack.com/services/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
