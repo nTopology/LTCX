@@ -35,4 +35,5 @@ This project has the following folders & files:
 - *Spec.md*
   `NTLatticeGraph` Spec.
 
+###License
 See the file [LICENSE.md](https://github.com/nTopology/NTLatticeGraph/blob/master/License.md "NTLatticeGraph License v0.1.0")
