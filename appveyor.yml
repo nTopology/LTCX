@@ -39,7 +39,7 @@ deploy:
       secure: YKAo1+qzKg7HsFY+wSJdghGsOlvvxACAvgBKL+SViA6MJAfD8dk7p4+CEQoLUz2lMGsk1weSXotfcSHMhEjbnxNbJY54xvFH/TvM1VPbwa2je3P3qwRdhB5khzpAvMoN
     container: lib-ntlatticegraph
     folder: $(APPVEYOR_PROJECT_SLUG)\$(APPVEYOR_BUILD_VERSION)
-    artifact: Element_Beta.zip
+    artifact: libNTLatticeGraph.zip
 
 notifications:
   # Slack
