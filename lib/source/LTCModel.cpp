@@ -45,59 +45,64 @@ namespace LTC {
     if (!root) {
       return LTC_ERROR::LTC_NO_LATTICE;
     }
-    int id;
-    err = root->QueryIntAttribute("id", &id); //get lattice id
-    if (err != 0) {
-      return static_cast<LTC_ERROR>(err);
-    }
-    
-    auto name = root->Attribute("name"); //get lattice name
-    if (name == nullptr) {
-      name = "no_name";
-    }
-    auto graph = LTCGraph::create(name, id);
-
-    auto nodes = root->FirstChildElement("nodes");
-    if (!nodes) {
-      return LTC_ERROR::LTC_NO_NODES;
-    }
-
-    // loop through nodes
-    auto currentNode = nodes->FirstChildElement("node");
-    if (!currentNode) {
-      return LTC_ERROR::LTC_NO_NODES;
-    }
-
-    double xVal, yVal, zVal, rad;
     do {
-      rad = -1.0;
-      currentNode->QueryDoubleAttribute("x", &xVal);
-      currentNode->QueryDoubleAttribute("y", &yVal);
-      currentNode->QueryDoubleAttribute("z", &zVal);
-      currentNode->QueryDoubleAttribute("rad", &rad);
-      graph->addNode(xVal, yVal, zVal, rad);
-      currentNode = currentNode->NextSiblingElement("node");
-    } while (currentNode);
-    
-    auto beams = nodes->NextSiblingElement("beams");
-    if (!beams) {
-      return LTC_ERROR::LTC_NO_BEAMS;
-    }
-    // loop through beams
-    auto currentBeam = beams->FirstChildElement("beam");
-    if (!currentBeam) {
-      return LTC_ERROR::LTC_NO_BEAMS;
-    }
+      int id;
+      err = root->QueryIntAttribute("id", &id); //get lattice id
+      if (err != 0) {
+        return static_cast<LTC_ERROR>(err);
+      }
 
-    int n1, n2;
-    do {
-      currentBeam->QueryIntAttribute("n1", &n1);
-      currentBeam->QueryIntAttribute("n2", &n2);
-      graph->addBeam(n1,n2);
-      currentBeam = currentBeam->NextSiblingElement("beam");
-    } while (currentBeam);
+      auto name = root->Attribute("name"); //get lattice name
+      if (name == nullptr) {
+        name = "no_name";
+      }
+      auto graph = LTCGraph::create(name, id);
 
-    mGraphs.push_back(graph);
+      auto nodes = root->FirstChildElement("nodes");
+      if (!nodes) {
+        return LTC_ERROR::LTC_NO_NODES;
+      }
+
+      // loop through nodes
+      auto currentNode = nodes->FirstChildElement("node");
+      if (!currentNode) {
+        return LTC_ERROR::LTC_NO_NODES;
+      }
+
+      double xVal, yVal, zVal, rad;
+      do {
+        rad = -1.0;
+        currentNode->QueryDoubleAttribute("x", &xVal);
+        currentNode->QueryDoubleAttribute("y", &yVal);
+        currentNode->QueryDoubleAttribute("z", &zVal);
+        currentNode->QueryDoubleAttribute("rad", &rad);
+        graph->addNode(xVal, yVal, zVal, rad);
+        currentNode = currentNode->NextSiblingElement("node");
+      } while (currentNode);
+
+      auto beams = nodes->NextSiblingElement("beams");
+      if (!beams) {
+        return LTC_ERROR::LTC_NO_BEAMS;
+      }
+      // loop through beams
+      auto currentBeam = beams->FirstChildElement("beam");
+      if (!currentBeam) {
+        return LTC_ERROR::LTC_NO_BEAMS;
+      }
+
+      int n1, n2;
+      do {
+        currentBeam->QueryIntAttribute("n1", &n1);
+        currentBeam->QueryIntAttribute("n2", &n2);
+        graph->addBeam(n1, n2);
+        currentBeam = currentBeam->NextSiblingElement("beam");
+      } while (currentBeam);
+
+      mGraphs.push_back(graph);
+
+      root = root->NextSiblingElement("lattice");
+    } while (root);
+    return LTC_ERROR::OK;
   }
 
   LTC::LTC_ERROR LTCModel::write(const char* path)
