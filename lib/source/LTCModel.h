@@ -25,24 +25,29 @@
 //
 
 #pragma once
-
+#include <memory>
+#include <vector>
 
 namespace LTC {
+  class LTCGraph;
 
   //! LTCModel
   /*!
   LTCModel is the parent interface for reading & writing Lattice Graph Objects.
+
+  This includes an in-memory reference of Lattice Graph Objects.
 
   Example Use:
   
   auto model = LTCModel::create();
   */
   class LTCModel {
+    typedef std::shared_ptr<LTCGraph> LTCGraphP;
   public:
-
+    LTCModel() {}
 
   private:
-   
+    std::vector<LTCGraphP> mGraphs;
   };
 
 
