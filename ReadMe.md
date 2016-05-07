@@ -1,4 +1,5 @@
 #NTLatticeGraph
+[![Build status](https://ci.appveyor.com/api/projects/status/0m4wmen1gjs3uouh?svg=true)](https://ci.appveyor.com/project/bradrothenberg/ntlatticegraph)
 
 ##About
 NTLatticeGraph is a lightweight, portable file specification for representing 3D lattice structures. NTLatticeGraph is, appropriately enough, a graph representation; its purpose is to allow for lattices to be designed, manipulated, simulated, and manufactured easily.
