@@ -25,29 +25,49 @@
 //
 
 #pragma once
-
+#include <vector>
 
 namespace LTC {
 
-  //! LTCModel
+  //! Node
   /*!
-  LTCModel is the parent interface for reading & writing Lattice Graph Objects.
-
-  Example Use:
-  
-  auto model = LTCModel::create();
+  Represents a node, additional properties can be added here.
+  note: not sure it makes sense to include vector classes for this?
   */
-  class LTCModel {
-  public:
+  struct Node {
+    double mX, mY, mZ;
+    double mRadius;
+  };
 
-
-  private:
-   
+  //! Beam
+  /*!
+  Represents a beam, additional properties can be added here.
+  */
+  struct Beam {
+    int mNode1Idx, mNode2Idx;
   };
 
 
+  //! LTCGraph
+  /*!
+  Represents a Lattice Graph.
+  */
+  class LTCGraph {
+  public:
+    LTCGraph() {}
+    
+    void addNode(double x, double y, double z, double radius = -1.0);
+    void addBeam(int idx1, int idx2);
+
+    const std::vector<Node>& getNodes()const { return mNodes; }
+    const std::vector<Beam>& getBeams()const { return mBeams; }
+
+  private:
+    std::vector<Node> mNodes;
+    std::vector<Beam> mBeams;
+  };
 
 
-}
+}//namespace LTC
 
 

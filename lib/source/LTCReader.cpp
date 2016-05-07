@@ -24,30 +24,6 @@
 // SOFTWARE.
 //
 
-#pragma once
-
-
-namespace LTC {
-
-  //! LTCModel
-  /*!
-  LTCModel is the parent interface for reading & writing Lattice Graph Objects.
-
-  Example Use:
-  
-  auto model = LTCModel::create();
-  */
-  class LTCModel {
-  public:
-
-
-  private:
-   
-  };
-
-
-
-
-}
+#include "LTCReader.h"
 
 

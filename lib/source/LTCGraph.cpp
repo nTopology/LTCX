@@ -24,30 +24,26 @@
 // SOFTWARE.
 //
 
-#pragma once
-
+#include "LTCGraph.h"
 
 namespace LTC {
+  void LTCGraph::addNode(double x, double y, double z, double radius /*= -1.0*/)
+  {
+    auto newNode = Node();
+    newNode.mX = x;
+    newNode.mY = y;
+    newNode.mZ = z;
+    newNode.mRadius = radius;
+    mNodes.push_back(std::move(newNode));
+  }
 
-  //! LTCModel
-  /*!
-  LTCModel is the parent interface for reading & writing Lattice Graph Objects.
+  void LTCGraph::addBeam(int idx1, int idx2)
+  {
+    auto newBeam = Beam();
+    newBeam.mNode1Idx = idx1;
+    newBeam.mNode2Idx = idx2;
 
-  Example Use:
-  
-  auto model = LTCModel::create();
-  */
-  class LTCModel {
-  public:
+    mBeams.push_back(std::move(newBeam));
+  }
 
-
-  private:
-   
-  };
-
-
-
-
-}
-
-
+} //namespace LTC

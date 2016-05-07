@@ -21,12 +21,18 @@
   <ItemGroup>
     <ClInclude Include="..\ext\tinyxml2\tinyxml2.h" />
     <ClInclude Include="..\source\libNTLG.h" />
+    <ClInclude Include="..\source\LTCGraph.h" />
     <ClInclude Include="..\source\LTCModel.h" />
+    <ClInclude Include="..\source\LTCReader.h" />
+    <ClInclude Include="..\source\LTCWriter.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\ext\tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="..\source\libNTLG.cpp" />
+    <ClCompile Include="..\source\LTCGraph.cpp" />
     <ClCompile Include="..\source\LTCModel.cpp" />
+    <ClCompile Include="..\source\LTCReader.cpp" />
+    <ClCompile Include="..\source\LTCWriter.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{33E0DA9F-C7C4-4308-AAD6-73218CD889BE}</ProjectGuid>
