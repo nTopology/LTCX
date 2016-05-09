@@ -29,19 +29,54 @@
 #include "tinyxml2.h"
 
 #include <iostream>
+#include <string>
+
+#include <stdio.h>
+
+#include <chrono>
+
+
+long getFileSize(const char* path)
+{
+  FILE * pFile;
+  long size;
+
+  fopen_s(&pFile,path, "rb");
+  if (pFile == NULL) perror("Error opening file");
+  else {
+    fseek(pFile, 0, SEEK_END);   // non-portable
+    size = ftell(pFile);
+    fclose(pFile);
+  }
+  return size;
+}
 
 int main(int argc, const char ** argv)
 {
   if (argc > 1) {
+    auto fileSize = getFileSize(argv[1]);
+    std::cout << "Size of "<< argv[1] << ": "<< std::to_string(fileSize) << " bytes"<< std::endl;
+
     auto model = LTC::LTCModel::create();
-
+    
+    auto time1 = std::chrono::high_resolution_clock::now();
     model->read(argv[1]);
-    model->write("..//..//samples//Sample_Out.ltcx");
-    tinyxml2::XMLDocument* doc = new tinyxml2::XMLDocument();
-    //clock_t startTime = clock();
-    doc->LoadFile(argv[1]);
+    auto time2 = std::chrono::high_resolution_clock::now();
 
-    delete doc;
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(time2 - time1).count();
+    std::cout << "File read in: " << duration << " ms"<<std::endl;
+
+    time1 = std::chrono::high_resolution_clock::now();
+    if (argc > 2) {
+      model->write(argv[2]);
+    }
+    else {
+      model->write("..//..//samples//Sample_Out.ltcx");
+    }
+    time2 = std::chrono::high_resolution_clock::now();
+
+    duration = std::chrono::duration_cast<std::chrono::milliseconds>(time2 - time1).count();
+    std::cout << "File written in: " << duration << " ms" << std::endl;
   }
 
   do {
@@ -50,3 +85,4 @@ int main(int argc, const char ** argv)
 
   return 0;
 }
+
