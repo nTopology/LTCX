@@ -41,24 +41,24 @@ namespace LTC {
     }
 
     //Get first lattice
-    auto root = doc.FirstChildElement("lattice");
-    if (!root) {
+    auto graphX = doc.FirstChildElement("graph");
+    if (!graphX) {
       return LTC_ERROR::LTC_NO_LATTICE;
     }
     do {
       int id;
-      err = root->QueryIntAttribute("id", &id); //get lattice id
+      err = graphX->QueryIntAttribute("id", &id); //get lattice id
       if (err != 0) {
         return static_cast<LTC_ERROR>(err);
       }
 
-      auto name = root->Attribute("name"); //get lattice name
+      auto name = graphX->Attribute("name"); //get lattice name
       if (name == nullptr) {
         name = "no_name";
       }
       auto graph = LTCGraph::create(name, id);
 
-      auto nodes = root->FirstChildElement("nodes");
+      auto nodes = graphX->FirstChildElement("nodes");
       if (!nodes) {
         return LTC_ERROR::LTC_NO_NODES;
       }
@@ -100,8 +100,8 @@ namespace LTC {
 
       mGraphs.push_back(graph);
 
-      root = root->NextSiblingElement("lattice");
-    } while (root);
+      graphX = graphX->NextSiblingElement("lattice");
+    } while (graphX);
     return LTC_ERROR::OK;
   }
 
@@ -111,10 +111,10 @@ namespace LTC {
     auto dec = doc->NewDeclaration();
     doc->InsertFirstChild(dec);
     for (auto& graph : mGraphs) {
-      auto latticeX = doc->NewElement("Lattice");
-      latticeX->SetAttribute("id", graph->getID());
-      latticeX->SetAttribute("name", graph->getName().c_str());
-      auto nodesX = latticeX->InsertEndChild(doc->NewElement("nodes"));
+      auto graphX = doc->NewElement("graph");
+      graphX->SetAttribute("id", graph->getID());
+      graphX->SetAttribute("name", graph->getName().c_str());
+      auto nodesX = graphX->InsertEndChild(doc->NewElement("nodes"));
 
       const auto& nodes = graph->getNodes();
       int count = 0;
@@ -131,7 +131,7 @@ namespace LTC {
         count++;
       }
 
-      auto beamsX = latticeX->InsertEndChild(doc->NewElement("beams"));
+      auto beamsX = graphX->InsertEndChild(doc->NewElement("beams"));
 
       const auto& beams = graph->getBeams();
       count = 0;
@@ -141,8 +141,9 @@ namespace LTC {
         newBeam->SetAttribute("n1", b.mNode1Idx);
         newBeam->SetAttribute("n2", b.mNode2Idx);
         beamsX->InsertEndChild(newBeam);
+        count++;
       }
-      doc->InsertEndChild(latticeX);
+      doc->InsertEndChild(graphX);
       count++;
     }
 

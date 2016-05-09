@@ -11,6 +11,5 @@ A c++ implementation of the NTLatticeGraph spec. This library should make it eas
 ```
 git clone https://github.com/nTopology/NTLatticeGraph.git
 cd NTLatticeGraph/lib
-
 ```
 
