@@ -87,3 +87,6 @@ lib/vc14/Debug/vc140.idb
 lib/vc14/libNTLatticeGraph.VC.db
 *.suo
 *.idb
+*.iobj
+lib/bin/x64/Release/libNTLatticeGraph.ipdb
+*.user
