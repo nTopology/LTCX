@@ -107,15 +107,22 @@ namespace LTC {
 
   LTC::LTC_ERROR LTCModel::write(const char* path)
   {
+    //Make new XML Doc
     auto doc = std::make_unique<XMLDocument>();
+    //Insert XML declaration header
     auto dec = doc->NewDeclaration();
     doc->InsertFirstChild(dec);
+
+    //Loop through graph objects & insert graph elements
     for (auto& graph : mGraphs) {
       auto graphX = doc->NewElement("graph");
       graphX->SetAttribute("id", graph->getID());
       graphX->SetAttribute("name", graph->getName().c_str());
+
+      //add element for nodegroup
       auto nodesX = graphX->InsertEndChild(doc->NewElement("nodegroup"));
 
+      //Loop through nodes & insert node elements
       const auto& nodes = graph->getNodes();
       int count = 0;
       for (auto& n : nodes) {
@@ -131,8 +138,10 @@ namespace LTC {
         count++;
       }
 
+      //add element for bamgroup
       auto beamsX = graphX->InsertEndChild(doc->NewElement("beamgroup"));
 
+      //Loop through beams & add beam elements
       const auto& beams = graph->getBeams();
       count = 0;
       for (auto& b : beams) {
@@ -143,6 +152,8 @@ namespace LTC {
         beamsX->InsertEndChild(newBeam);
         count++;
       }
+
+      //add graph to document
       doc->InsertEndChild(graphX);
       count++;
     }
