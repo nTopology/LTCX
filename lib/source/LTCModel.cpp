@@ -58,7 +58,7 @@ namespace LTC {
       }
       auto graph = LTCGraph::create(name, id);
 
-      auto nodes = graphX->FirstChildElement("nodes");
+      auto nodes = graphX->FirstChildElement("nodegroup");
       if (!nodes) {
         return LTC_ERROR::LTC_NO_NODES;
       }
@@ -80,7 +80,7 @@ namespace LTC {
         currentNode = currentNode->NextSiblingElement("node");
       } while (currentNode);
 
-      auto beams = nodes->NextSiblingElement("beams");
+      auto beams = nodes->NextSiblingElement("beamgroup");
       if (!beams) {
         return LTC_ERROR::LTC_NO_BEAMS;
       }
@@ -100,22 +100,29 @@ namespace LTC {
 
       mGraphs.push_back(graph);
 
-      graphX = graphX->NextSiblingElement("lattice");
+      graphX = graphX->NextSiblingElement("graph");
     } while (graphX);
     return LTC_ERROR::OK;
   }
 
   LTC::LTC_ERROR LTCModel::write(const char* path)
   {
+    //Make new XML Doc
     auto doc = std::make_unique<XMLDocument>();
+    //Insert XML declaration header
     auto dec = doc->NewDeclaration();
     doc->InsertFirstChild(dec);
+
+    //Loop through graph objects & insert graph elements
     for (auto& graph : mGraphs) {
       auto graphX = doc->NewElement("graph");
       graphX->SetAttribute("id", graph->getID());
       graphX->SetAttribute("name", graph->getName().c_str());
-      auto nodesX = graphX->InsertEndChild(doc->NewElement("nodes"));
 
+      //add element for nodegroup
+      auto nodesX = graphX->InsertEndChild(doc->NewElement("nodegroup"));
+
+      //Loop through nodes & insert node elements
       const auto& nodes = graph->getNodes();
       int count = 0;
       for (auto& n : nodes) {
@@ -131,8 +138,10 @@ namespace LTC {
         count++;
       }
 
-      auto beamsX = graphX->InsertEndChild(doc->NewElement("beams"));
+      //add element for bamgroup
+      auto beamsX = graphX->InsertEndChild(doc->NewElement("beamgroup"));
 
+      //Loop through beams & add beam elements
       const auto& beams = graph->getBeams();
       count = 0;
       for (auto& b : beams) {
@@ -143,6 +152,8 @@ namespace LTC {
         beamsX->InsertEndChild(newBeam);
         count++;
       }
+
+      //add graph to document
       doc->InsertEndChild(graphX);
       count++;
     }
