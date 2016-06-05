@@ -21,7 +21,7 @@ Properties:
 * r, double representing the radius
 
 ###Beams
-A line connecting two nodes. If the nodes have diameters defined, the beam has a thickness. The thickness at any given point along the beam is defined by an interpolation function. The default interpolation function in linear.
+A connection between two nodes. If the nodes have radii defined, the beam has a thickness. The thickness at any given point along the beam is defined by an interpolation function. The default interpolation function is linear.
 
 Properties:
 * id, unique (within beams) integer
