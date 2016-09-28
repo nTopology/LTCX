@@ -29,6 +29,13 @@
 #include <vector>
 
 namespace LTC {
+  enum class LTCUnits {
+    MM = 0,
+    CM = 1,
+    M = 2,
+    IN = 3,
+    FT = 4,
+  };
 
   //! Node
   /*!
@@ -55,8 +62,10 @@ namespace LTC {
   */
   class LTCGraph {
   public:
-    static std::shared_ptr<LTCGraph> create(const std::string& name, int id) {
-      return std::make_shared<LTCGraph>(name,id);
+    static std::shared_ptr<LTCGraph> create(const std::string& name, 
+                                            int id,
+                                            LTCUnits units = LTCUnits::MM) {
+      return std::make_shared<LTCGraph>(name,id,units);
     }
     static std::shared_ptr<LTCGraph> create(int id) {
       return std::make_shared<LTCGraph>(id);
@@ -65,17 +74,22 @@ namespace LTC {
   public:
     LTCGraph(int id):
       mID{ id } {}
-    LTCGraph(const std::string& name, int id):
+    LTCGraph(const std::string& name, int id, LTCUnits units = LTCUnits::MM):
       mName{ name },
-      mID{ id }
+      mID{ id },
+      mUnits{units}
     {}
     
     void setName(const std::string& name) { mName = name; }
+    void setUnits(LTCUnits units) { mUnits = units; }
+
     void addNode(double x, double y, double z, double radius = -1.0);
     void addBeam(int idx1, int idx2);
 
     const std::vector<Node>& getNodes()const { return mNodes; }
     const std::vector<Beam>& getBeams()const { return mBeams; }
+    LTCUnits getUnits()const { return mUnits; }
+
     const std::string& getName()const { return mName; }
     int getID()const { return mID; }
 
@@ -83,6 +97,7 @@ namespace LTC {
     void setBeams(const std::vector<Beam>& beams) { mBeams = beams; }
   private:
     std::string mName;
+    LTCUnits mUnits;
     int mID;
     std::vector<Node> mNodes;
     std::vector<Beam> mBeams;

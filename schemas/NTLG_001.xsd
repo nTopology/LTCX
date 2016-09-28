@@ -50,6 +50,7 @@
         <xs:element ref="beamgroup" />
         <xs:attribute name="id" type="ST_ResourceID" use="required"/>
         <xs:attribute name="name" type="xs:string" use="optional"/>
+        <xs:attribute name="units" type="xs:string" use="optional"/>
       </xs:complexType>
 
       <!-- Simple Types -->
