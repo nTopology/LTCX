@@ -56,7 +56,25 @@ namespace LTC {
       if (name == nullptr) {
         name = "no_name";
       }
-      auto graph = LTCGraph::create(name, id);
+      LTCUnits gUnits;
+      auto units = graphX->Attribute("units");
+      if (units == nullptr || units == "mm") {
+        gUnits = LTCUnits::MM;
+      }
+      else if (units == "m") {
+        gUnits = LTCUnits::M;
+      }
+      else if (units == "cm") {
+        gUnits = LTCUnits::CM;
+      }
+      else if (units == "in") {
+        gUnits = LTCUnits::IN;
+      }
+      else if (units == "ft") {
+        gUnits = LTCUnits::FT;
+      }
+
+      auto graph = LTCGraph::create(name, id, gUnits);
 
       auto nodes = graphX->FirstChildElement("nodegroup");
       if (!nodes) {
@@ -119,6 +137,22 @@ namespace LTC {
       graphX->SetAttribute("id", graph->getID());
       graphX->SetAttribute("name", graph->getName().c_str());
 
+      auto gUnits = graph->getUnits();
+      if (gUnits == LTCUnits::MM) {
+        graphX->SetAttribute("units", "mm");
+      }
+      else if (gUnits == LTCUnits::CM) {
+        graphX->SetAttribute("units", "mm");
+      }
+      else if (gUnits == LTCUnits::M) {
+        graphX->SetAttribute("units", "m");
+      }
+      else if (gUnits == LTCUnits::FT) {
+        graphX->SetAttribute("units", "ft");
+      }
+      else if (gUnits == LTCUnits::IN) {
+        graphX->SetAttribute("units", "in");
+      }
       //add element for nodegroup
       auto nodesX = graphX->InsertEndChild(doc->NewElement("nodegroup"));
 

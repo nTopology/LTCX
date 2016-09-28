@@ -1,6 +1,6 @@
 #NTLatticeGraph
 
-##About
+#About
 
 NTLattice graph is a portable .xml file that represents a lattice by its topology. A lattice is defined by a set of `nodes` and `beams`. In the future, it's possible that it will be extended to include `surfaces` and `volumes`.
 
@@ -8,7 +8,15 @@ NTLatticeGraph is meant to represent the topology of a lattice, with the primary
 
 For more information about how NTLatticeGraph operates in nTopology Element, see <https://github.com/nTopology/Element-Documentation>.
 
-##Types
+#Types
+
+##Graph
+A collection of nodes & beams
+
+Properties:
+* id, unique (within the file) integer
+* name
+* units, string ID either: *mm* *cm* *m* *in* *ft*
 
 ###Nodes
 A point in 3D space that optionally has a radius.

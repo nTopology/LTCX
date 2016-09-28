@@ -66,7 +66,6 @@ namespace LTC {
 
   };
 
-
   //! LTCModel
   /*!
   LTCModel is the parent interface for reading & writing Lattice Graph Objects.
