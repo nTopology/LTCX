@@ -57,21 +57,27 @@ namespace LTC {
         name = "no_name";
       }
       LTCUnits gUnits;
-      auto units = graphX->Attribute("units");
-      if (units == nullptr || units == "mm") {
+      auto unitsRead = graphX->Attribute("units");
+      if (unitsRead == nullptr) {
         gUnits = LTCUnits::MM;
       }
-      else if (units == "m") {
-        gUnits = LTCUnits::M;
-      }
-      else if (units == "cm") {
-        gUnits = LTCUnits::CM;
-      }
-      else if (units == "in") {
-        gUnits = LTCUnits::IN;
-      }
-      else if (units == "ft") {
-        gUnits = LTCUnits::FT;
+      else {
+        auto units = std::string(unitsRead);
+        if (units == "mm") {
+          gUnits = LTCUnits::MM;
+        }
+        else if (units == "m") {
+          gUnits = LTCUnits::M;
+        }
+        else if (units == "cm") {
+          gUnits = LTCUnits::CM;
+        }
+        else if (units == "in") {
+          gUnits = LTCUnits::IN;
+        }
+        else if (units == "ft") {
+          gUnits = LTCUnits::FT;
+        }
       }
 
       auto graph = LTCGraph::create(name, id, gUnits);
