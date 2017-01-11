@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="https://github.com/nTopology/NTLatticeGraph/blob/master/schemas/NTLG_001.xsd"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace"
+  targetNamespace="https://github.com/nTopology/NTLatticeGraph/blob/master/schemas/NTLG_001.xsd"
+  elementFormDefault="unqualified" attributeFormDefault="unqualified" blockDefault="#all">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+    schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+    <xs:annotation>
+      <xs:documentation><![CDATA[
+        Schema notes:
+        Items within this schema follow a simple naming convention of appending a prefix indicating the
+        type of element for references:
+        Unprefixed: Element names
+        CT_: Complex types
+        ST_: Simple types
+        ]]></xs:documentation>
+      </xs:annotation>
+
+      <!-- Complex Types -->
+      <xs:complexType name="CT_Node">
+        <xs:attribute name="id" type="ST_ResourceID" use="required"/>
+        <xs:attribute name="x" type="ST_Number" use="required"/>
+        <xs:attribute name="y" type="ST_Number" use="required"/>
+        <xs:attribute name="z" type="ST_Number" use="required"/>
+        <xs:attribute name="xs" type="ST_Number" use="optional"/>
+        <xs:attribute name="ys" type="ST_Number" use="optional"/>
+        <xs:attribute name="zs" type="ST_Number" use="optional"/>
+        <xs:attribute name="xe" type="ST_Number" use="optional"/>
+        <xs:attribute name="ye" type="ST_Number" use="optional"/>
+        <xs:attribute name="ze" type="ST_Number" use="optional"/>
+        <xs:attribute name="r" type="ST_Number" use="optional"/>
+      </xs:complexType>
+
+      <xs:complexType name="CT_Beam">
+        <xs:attribute name="id" type="ST_ResourceID" use="required"/>
+        <xs:attribute name="n1" type="ST_ResourceID" use="required"/>
+        <xs:attribute name="n2" type="ST_ResourceID" use="required"/>
+      </xs:complexType>
+      
+      <xs:complexType name="CT_Face">
+        <xs:attribute name="id" type="ST_ResourceID" use="required"/>
+        <xs:attribute name="n1" type="ST_ResourceID" use="required"/>
+        <xs:attribute name="n2" type="ST_ResourceID" use="required"/>
+        <xs:attribute name="n3" type="ST_ResourceID" use="required"/>
+        <xs:attribute name="n4" type="ST_ResourceID" use="optional"/>
+      </xs:complexType>
+
+      <xs:complexType name="CT_NodeGroup">
+        <xs:sequence>
+          <xs:element ref="node" maxOccurs="2147483647"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="ST_ResourceID" use="required"/>
+      </xs:complexType>
+
+      <xs:complexType name="CT_BeamGroup">
+        <xs:sequence>
+          <xs:element ref="beamgroup" maxOccurs="2147483647"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="ST_ResourceID" use="required"/>
+      </xs:complexType>
+
+      <xs:complexType name="CT_FaceGroup">
+        <xs:sequence>
+          <xs:element ref="facegroup" maxOccurs="2147483647"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="ST_ResourceID" use="required"/>
+      </xs:complexType>
+
+      <xs:complexType name="CT_Graph">
+        <xs:element ref="nodegroup" />
+        <xs:element ref="beamgroup" />
+        <xs:attribute name="id" type="ST_ResourceID" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="optional"/>
+        <xs:attribute name="units" type="xs:string" use="optional"/>
+      </xs:complexType>
+
+      <!-- Simple Types -->
+    </xs:simpleType>
+    <xs:simpleType name="ST_ResourceID">
+      <xs:restriction base="xs:positiveInteger">
+        <xs:maxExclusive value="2147483648"/>
+      </xs:restriction>
+    </xs:simpleType>
+
+  </xs:simpleType>
+  <xs:simpleType name="ST_Number">
+    <xs:restriction base="xs:double">
+      <xs:whiteSpace value="collapse"/>
+      <xs:pattern value="((\-|\+)?(([0-9]+(\.[0-9]+)?)|(\.[0-9]+))((e|E)(\-|\+)?[0-9]+)?)"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Elements -->
+  <xs:element name="nodegroup" type="CT_NodeGroup"/>
+  <xs:element name="beamgroup" type="CT_BeamGroup" />
+  <xs:element name="facegroup" type="CT_FaceGroup" />
+
+  <xs:element name="node" type="CT_Node"/>
+  <xs:element name="beam" type="CT_Beam"/>
+  <xs:element name="face" type="CT_Face"/>
+  <xs:element name="graph" type="CT_Graph"/>
+
+</xs:schema>

@@ -11,7 +11,7 @@ For more information about how NTLatticeGraph operates in nTopology Element, see
 #Types
 
 ##Graph
-A collection of nodes & beams
+A collection of nodes & beams &/or faces
 
 Properties:
 * id, unique (within the file) integer
@@ -36,5 +36,13 @@ Properties:
 * n1, a reference to a node ID
 * n2, a reference to a node ID (note: N1 != N2)
 
-##Surfaces
-TBD
+###Faces
+A tri or quad face defined by nodes in counter-clockwise order.
+
+Properties:
+* id, unique (within beams) integer
+* n1, a reference to a node ID
+* n2, a reference to a node ID
+* n3, a reference to a node ID
+* n4, an optional reference to a node ID
+(note: n1 != n2 != n3 != n4)
