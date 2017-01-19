@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<graph id="0" name="cube unit" units="mm">
+<!---->
+<graph id="0" name="cube unit" units="mm" type="rnd">
     <nodegroup>
-        <node id="0" x="-1" y="-1" z="-1" r="1"/>
-        <node id="1" x="1" y="-1" z="-1" r="1"/>
-        <node id="2" x="1" y="1" z="-1" r="1"/>
-        <node id="3" x="-1" y="1" z="-1" r="1"/>
-        <node id="4" x="-1" y="-1" z="1" r="1"/>
-        <node id="5" x="1" y="-1" z="1" r="1"/>
-        <node id="6" x="1" y="1" z="1" r="1"/>
-        <node id="7" x="-1" y="1" z="1" r="1"/>
+        <node id="0" x="-1" y="-1" z="-1"/>
+        <node id="1" x="1" y="-1" z="-1"/>
+        <node id="2" x="1" y="1" z="-1"/>
+        <node id="3" x="-1" y="1" z="-1"/>
+        <node id="4" x="-1" y="-1" z="1"/>
+        <node id="5" x="1" y="-1" z="1"/>
+        <node id="6" x="1" y="1" z="1"/>
+        <node id="7" x="-1" y="1" z="1"/>
     </nodegroup>
     <beamgroup>
         <beam id="0" n1="0" n2="1"/>

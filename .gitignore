@@ -91,3 +91,4 @@ lib/vc14/libNTLatticeGraph.VC.db
 lib/bin/x64/Release/libNTLatticeGraph.ipdb
 *.user
 *.user
+*.user
