@@ -98,7 +98,7 @@ namespace LTC {
     LTC_ERROR readFromFile(const char* path);
 
     LTC_ERROR writeToXml(tinyxml2::XMLDocument* doc,
-                         const std::string&     comment);
+                         const std::string& comment);
     LTC_ERROR writeToFile(const char* path,
                           const std::string& comment);
 

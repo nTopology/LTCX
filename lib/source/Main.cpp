@@ -60,7 +60,7 @@ int main(int argc, const char ** argv)
     auto model = LTC::LTCModel::create();
     
     auto time1 = std::chrono::high_resolution_clock::now();
-    model->read(argv[1]);
+    model->readFromFile(argv[1]);
     auto time2 = std::chrono::high_resolution_clock::now();
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(time2 - time1).count();
@@ -68,10 +68,10 @@ int main(int argc, const char ** argv)
 
     time1 = std::chrono::high_resolution_clock::now();
     if (argc > 2) {
-      model->write(argv[2]);
+      model->writeToFile(argv[2],"");
     }
     else {
-      model->write("..//..//samples//Sample_Out.ltcx");
+      model->writeToFile("..//..//samples//Sample_Out.ltcx","");
     }
     time2 = std::chrono::high_resolution_clock::now();
 
