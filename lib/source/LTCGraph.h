@@ -27,6 +27,7 @@
 #pragma once
 #include <memory>
 #include <vector>
+#include <string>
 
 namespace LTC {
   enum class LTCUnits {
@@ -43,7 +44,18 @@ namespace LTC {
   note: not sure it makes sense to include vector classes for this?
   */
   struct Node {
+    Node() :
+      mXS(-1),
+      mYS(-1),
+      mZS(-1),
+      mXE(-1),
+      mYE(-1),
+      mZE(-1),
+      mRadius(-1) {}
     double mX, mY, mZ;
+    double mXS, mYS, mZS;
+    double mXE, mYE, mZE;
+
     double mRadius;
   };
 
@@ -55,6 +67,14 @@ namespace LTC {
     int mNode1Idx, mNode2Idx;
   };
 
+  //! Face
+  /*!
+  Represents a face, (max 4 sides). Additional properties can be added here.
+  */
+  struct Face {
+    int v0, v1, v2, v3;
+  };
+
 
   //! LTCGraph
   /*!
@@ -62,45 +82,56 @@ namespace LTC {
   */
   class LTCGraph {
   public:
-    static std::shared_ptr<LTCGraph> create(const std::string& name, 
+    static std::shared_ptr<LTCGraph> create(const std::string& name,
                                             int id,
                                             LTCUnits units = LTCUnits::MM) {
-      return std::make_shared<LTCGraph>(name,id,units);
+      return std::make_shared<LTCGraph>(name, id, units);
     }
     static std::shared_ptr<LTCGraph> create(int id) {
       return std::make_shared<LTCGraph>(id);
     }
 
   public:
-    LTCGraph(int id):
-      mID{ id } {}
-    LTCGraph(const std::string& name, int id, LTCUnits units = LTCUnits::MM):
+    LTCGraph(int id) :
+      mID{ id },
+      mUnits{ LTCUnits::MM } {}
+    LTCGraph(const std::string& name, int id, LTCUnits units = LTCUnits::MM) :
       mName{ name },
       mID{ id },
-      mUnits{units}
-    {}
-    
+      mUnits{ units } {}
+
     void setName(const std::string& name) { mName = name; }
     void setUnits(LTCUnits units) { mUnits = units; }
 
     void addNode(double x, double y, double z, double radius = -1.0);
+    void addNode(double x, double y, double z, double radius,
+                 double xS, double yS, double zS,
+                 double xE, double yE, double zE);
+
     void addBeam(int idx1, int idx2);
+    void addFace(int n0, int n1, int n2, int n3 = -1);
 
     const std::vector<Node>& getNodes()const { return mNodes; }
     const std::vector<Beam>& getBeams()const { return mBeams; }
-    LTCUnits getUnits()const { return mUnits; }
+    const std::vector<Face>& getFaces()const { return mFaces; }
 
     const std::string& getName()const { return mName; }
     int getID()const { return mID; }
+    LTCUnits getUnits()const { return mUnits; }
 
     void setNodes(const std::vector<Node>& nodes) { mNodes = nodes; }
     void setBeams(const std::vector<Beam>& beams) { mBeams = beams; }
+    void setFaces(const std::vector<Face>& faces) { mFaces = faces; }
+
   private:
     std::string mName;
     LTCUnits mUnits;
+
     int mID;
     std::vector<Node> mNodes;
     std::vector<Beam> mBeams;
+    std::vector<Face> mFaces;
+
   };
 
 

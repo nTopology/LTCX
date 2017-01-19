@@ -10,7 +10,7 @@
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and / or sell
 // copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions :
+// furnished to do so, subject to the following conditioans :
 // 
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
@@ -27,6 +27,7 @@
 #pragma once
 #include "LTCGraph.h"
 
+#include <tinyxml2.h>
 #include <memory>
 #include <vector>
 
@@ -66,6 +67,7 @@ namespace LTC {
 
   };
 
+
   //! LTCModel
   /*!
   LTCModel is the parent interface for reading & writing Lattice Graph Objects.
@@ -79,20 +81,42 @@ namespace LTC {
   class LTCModel {
     typedef std::shared_ptr<LTCGraph> LTCGraphP;
   public:
-    static std::shared_ptr<LTCModel> create() { 
-      return std::make_shared<LTCModel>(); 
+    enum GRAPH_TYPE {
+      UNDEFINED = 0,
+      ROUND = 1,
+      RIB = 2
+    };
+
+    static std::shared_ptr<LTCModel> create() {
+      return std::make_shared<LTCModel>();
     }
   public:
     LTCModel() {}
 
-    LTC_ERROR read(const char* path);
-    LTC_ERROR write(const char* path);
+    LTC_ERROR readFromXml(tinyxml2::XMLDocument& doc);
+    LTC_ERROR readFromText(const char* text, size_t numOfBytes);
+    LTC_ERROR readFromFile(const char* path);
+
+    LTC_ERROR writeToXml(tinyxml2::XMLDocument* doc,
+                         const std::string&     comment);
+    LTC_ERROR writeToFile(const char* path,
+                          const std::string& comment);
+
+    LTC_ERROR getTypes(const char* path, std::vector<GRAPH_TYPE>& types);
 
     //a few ways to add graphs to the model -- for writing out.
     LTC_ERROR addGeometry(const std::vector<Node>& nodes,
                           const std::vector<Beam>& beams,
                           const std::string& name);
+    LTC_ERROR addGeometry(const std::vector<Node>& nodes,
+                          const std::vector<Beam>& beams,
+                          const std::vector<Face>& faces,
+                          const std::string& name);
+
     LTC_ERROR addGeometry(std::shared_ptr<LTCGraph> graph);
+
+    const std::vector<LTCGraphP>& getGraphs()const { return mGraphs; }
+
   private:
     std::vector<LTCGraphP> mGraphs;
   };

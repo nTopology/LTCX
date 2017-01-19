@@ -23,7 +23,6 @@
     <ClInclude Include="..\source\libNTLG.h" />
     <ClInclude Include="..\source\LTCGraph.h" />
     <ClInclude Include="..\source\LTCModel.h" />
-    <ClInclude Include="..\source\LTCReader.h" />
     <ClInclude Include="..\source\LTCWriter.h" />
   </ItemGroup>
   <ItemGroup>
@@ -31,7 +30,6 @@
     <ClCompile Include="..\source\Main.cpp" />
     <ClCompile Include="..\source\LTCGraph.cpp" />
     <ClCompile Include="..\source\LTCModel.cpp" />
-    <ClCompile Include="..\source\LTCReader.cpp" />
     <ClCompile Include="..\source\LTCWriter.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
