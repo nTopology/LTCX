@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<graph id ="0" name ="cube unit_Srfs">
+  <nodegroup>
+    <node id="0" x="-1.0" y="-1.0" z="-1.0" rad="1."/>
+    <node id="1" x="1.0"  y="-1.0" z="-1.0" rad="1."/>
+    <node id="2" x="1.0"  y="1.0"  z="-1.0" rad="1."/>
+    <node id="3" x="-1.0" y="1.0"  z="-1.0" rad="1."/>
+    <node id="4" x="-1.0" y="-1.0" z="1.0"  rad="1."/>
+    <node id="5" x="1.0"  y="-1.0" z="1.0"  rad="1."/>
+    <node id="6" x="1.0"  y="1.0"  z="1.0"  rad="1."/>
+    <node id="7" x="-1.0" y="1.0"  z="1.0"  rad="1."/>
+  </nodegroup>
+
+  <beamgroup>
+    <beam id="0" n1="0"  n2="1"/>
+    <beam id="1" n1="1"  n2="2"/>
+    <beam id="2" n1="2"  n2="3"/>
+    <beam id="3" n1="3"  n2="0"/>
+    <beam id="4" n1="4"  n2="5"/>
+    <beam id="5" n1="5"  n2="6"/>
+    <beam id="6" n1="6"  n2="7"/>
+    <beam id="7" n1="7"  n2="4"/>
+    <beam id="8" n1="0"  n2="4"/>
+    <beam id="9" n1="1"  n2="5"/>
+    <beam id="10" n1="2" n2="6"/>
+    <beam id="11" n1="3" n2="7"/>
+  </beamgroup>
+
+  <facegroup>
+    <face id="0" n1="0"  n2="1"/>
+    <face id="1" n1="1"  n2="2"/>
+    <face id="2" n1="2"  n2="3"/>
+    <face id="3" n1="3"  n2="0"/>
+  </facegroup>
+
+</graph>

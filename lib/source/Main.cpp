@@ -78,6 +78,59 @@ int main(int argc, const char ** argv)
     duration = std::chrono::duration_cast<std::chrono::milliseconds>(time2 - time1).count();
     std::cout << "File written in: " << duration << " ms" << std::endl;
   }
+  else {
+    std::string file1 = "..//..//samples//SampleCube.ltcx";
+    std::string file1Srf = "..//..//samples//SampleCube_SRF.ltcx";
+
+    std::string file1Out = "..//..//samples//SampleCube_out.ltcx";
+    std::string file1SrfOut = "..//..//samples//SampleCube_SRF_out.ltcx";
+
+    // Read file1, includes Surfaces
+    {
+      auto fileSize = getFileSize(file1.c_str());
+      std::cout << "Size of " << file1 << ": " << std::to_string(fileSize) << " bytes" << std::endl;
+
+      auto model = LTC::LTCModel::create();
+
+      auto time1 = std::chrono::high_resolution_clock::now();
+      model->readFromFile(file1.c_str());
+      auto time2 = std::chrono::high_resolution_clock::now();
+
+      auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(time2 - time1).count();
+      std::cout << "File read in: " << duration << " ms" << std::endl;
+
+      time1 = std::chrono::high_resolution_clock::now();
+      model->writeToFile(file1Out.c_str(), "");
+      time2 = std::chrono::high_resolution_clock::now();
+
+      duration = std::chrono::duration_cast<std::chrono::milliseconds>(time2 - time1).count();
+      std::cout << "File written in: " << duration << " ms" << std::endl;
+  }
+
+    //Read file1Srf, includes Surfaces
+    {
+      auto fileSize = getFileSize(file1Srf.c_str());
+      std::cout << "Size of " << file1Srf << ": " << std::to_string(fileSize) << " bytes" << std::endl;
+
+      auto model = LTC::LTCModel::create();
+
+      auto time1 = std::chrono::high_resolution_clock::now();
+      model->readFromFile(file1Srf.c_str());
+      auto time2 = std::chrono::high_resolution_clock::now();
+
+      auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(time2 - time1).count();
+      std::cout << "File read in: " << duration << " ms" << std::endl;
+
+      time1 = std::chrono::high_resolution_clock::now();
+      model->writeToFile(file1SrfOut.c_str(), "");
+      time2 = std::chrono::high_resolution_clock::now();
+
+      duration = std::chrono::duration_cast<std::chrono::milliseconds>(time2 - time1).count();
+      std::cout << "File written in: " << duration << " ms" << std::endl;
+    }
+  }
+
+
 
   do {
     std::cout << '\n' << "Press Enter to continue...";
