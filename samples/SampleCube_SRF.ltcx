@@ -29,9 +29,9 @@
   </beamgroup>
 
   <facegroup>
-    <face id="0" n1="0"  n2="1" n3="2"  n4="3"//>
-    <face id="0" n1="4"  n2="5" n3="6"  n4="7"//>
-    <face id="0" n1="0"  n2="1" n3="4"  n4="4"//>
+    <face id="0" n1="0"  n2="1" n3="2"  n4="3"/>
+    <face id="0" n1="4"  n2="5" n3="6"  n4="7"/>
+    <face id="0" n1="0"  n2="1" n3="4"/>
   </facegroup>
 
 </graph>
