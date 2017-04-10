@@ -348,7 +348,7 @@ namespace LTC {
       if ( name == nullptr ) {
         name = "no_name";
       }
-      auto type = graphX->Attribute("type"); //get lattice name
+      auto type = graphX->Attribute("type"); //get lattice type
       if ( type == nullptr ) {
         types.push_back(ROUND);
       }
