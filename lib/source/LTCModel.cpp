@@ -223,7 +223,7 @@ namespace LTC {
         graphX->SetAttribute("units", "mm");
       }
       else if ( gUnits == LTCUnits::CM ) {
-        graphX->SetAttribute("units", "mm");
+        graphX->SetAttribute("units", "cm");
       }
       else if ( gUnits == LTCUnits::M ) {
         graphX->SetAttribute("units", "m");
