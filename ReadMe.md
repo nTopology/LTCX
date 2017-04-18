@@ -1,4 +1,4 @@
-#NTLatticeGraph
+#LTCX
 [![Build status](https://ci.appveyor.com/api/projects/status/0m4wmen1gjs3uouh?svg=true)](https://ci.appveyor.com/project/bradrothenberg/ntlatticegraph)
 
 ##About
