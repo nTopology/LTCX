@@ -223,7 +223,7 @@ namespace LTC {
         graphX->SetAttribute("units", "mm");
       }
       else if ( gUnits == LTCUnits::CM ) {
-        graphX->SetAttribute("units", "mm");
+        graphX->SetAttribute("units", "cm");
       }
       else if ( gUnits == LTCUnits::M ) {
         graphX->SetAttribute("units", "m");
@@ -348,7 +348,7 @@ namespace LTC {
       if ( name == nullptr ) {
         name = "no_name";
       }
-      auto type = graphX->Attribute("type"); //get lattice name
+      auto type = graphX->Attribute("type"); //get lattice type
       if ( type == nullptr ) {
         types.push_back(ROUND);
       }
